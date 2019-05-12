@@ -14,7 +14,6 @@ class CarrierList(models.Model):
     def save(self, *args, **kwargs):
         super(CarrierList, self).save(*args, **kwargs)
         filename = self.data.url
-        # Do anything you'd like with the data in filename
         for (number, price) in routes_gen(filename):
             obj = Price(number=number, price=price)
             obj.save() 
