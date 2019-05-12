@@ -4,8 +4,8 @@ from .data_reader import routes_gen
 # Create your models here.
 
 class Price(models.Model):
-    number = models.IntegerField()
-    price = models.FloatField()
+    number = models.CharField(max_length=17)
+    price = models.CharField(max_length=6)
 
 
 class CarrierList(models.Model):
@@ -15,6 +15,9 @@ class CarrierList(models.Model):
         super(CarrierList, self).save(*args, **kwargs)
         filename = self.data.url
         for (number, price) in routes_gen(filename):
+            number = str(number)
+            price = str(price)
+            
             obj = Price(number=number, price=price)
             obj.save() 
 
