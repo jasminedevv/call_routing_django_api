@@ -11,3 +11,6 @@ Example:
 https://call-api-jasmine-dacio-django.herokuapp.com/get-price/+4990569325
 
 It contains costs found in route-costs-106000.txt, route-costs-35000.txt, and as much of route-costs-10000000.txt as Heroku's free-tier Postrges database could eat.
+
+### How to grade
+The important logic is found in routes/models.py. Everything else is just web stuff.
