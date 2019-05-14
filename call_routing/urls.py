@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from routes.views import return_price
+from routes.views import return_price, render_usage
+from django.shortcuts import render
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('get-price/', return_price),
     path('get-price/<number>/', return_price, name='number'),
+    path('', render_usage)
 ]

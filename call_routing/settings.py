@@ -56,7 +56,7 @@ ROOT_URLCONF = 'call_routing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["routes/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

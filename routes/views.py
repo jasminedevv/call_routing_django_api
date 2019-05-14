@@ -12,3 +12,6 @@ def return_price(request, number):
     print("for number:", number)
     
     return JsonResponse({'price':price})
+
+def render_usage(request):
+    return render(request, 'usage.html')
