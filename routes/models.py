@@ -14,13 +14,13 @@ class CarrierList(models.Model):
     def save(self, *args, **kwargs):
         super(CarrierList, self).save(*args, **kwargs)
         filename = self.data.url
-        prices = set()
+        prices = []
         for (number, price) in routes_gen(filename):
             number = str(number)
             price = str(price)
             
             obj = Price(number=number, price=price)
-            prices.add(obj)
+            prices.append(obj)
         
         Price.objects.bulk_create(prices)
 
@@ -30,9 +30,16 @@ def get_price(number):
     while prefix != "":
         print("checking prefix:", prefix)
         try:
-            price = Price.objects.get(number=number).price
+            price = Price.objects.get(number=prefix).price
             print("found price:", price)
             return str(price)
         except Price.DoesNotExist:
-            print("could not find an entry :(")
-            return 0
+            prefix = prefix[:-1]
+        except Price.MultipleObjectsReturned:
+            routes = Price.objects.filter(number=prefix)
+            prices = [route.price for route in routes]
+
+            return min(prices)
+    
+    print("could not find an entry :(")
+    return "No route found."

@@ -2,3 +2,5 @@ __pycache__
 files/*
 db.*
 env
+migrations/
+route-costs-*.txt
