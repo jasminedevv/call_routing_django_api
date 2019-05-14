@@ -14,12 +14,15 @@ class CarrierList(models.Model):
     def save(self, *args, **kwargs):
         super(CarrierList, self).save(*args, **kwargs)
         filename = self.data.url
+        prices = set()
         for (number, price) in routes_gen(filename):
             number = str(number)
             price = str(price)
             
             obj = Price(number=number, price=price)
-            obj.save() 
+            prices.add(obj)
+        
+        Price.objects.bulk_create(prices)
 
 def get_price(number):
     print("getting price")
